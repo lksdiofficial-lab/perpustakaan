@@ -226,7 +226,7 @@
                 const item = document.createElement('div');
                 item.className = 'book-item';
                 
-                const thumbnailUrl = `https://google.com{book.id}`;
+                const thumbnailUrl = `https://google.com+book.id`;
                 
                 item.innerHTML = `
                     <img class="book-thumbnail" src="${thumbnailUrl}" alt="${book.judul}" onerror="this.src='https://placehold.co'">
@@ -265,7 +265,7 @@
             
             placeholder.style.display = "none";
             iframe.style.display = "block";
-            iframe.src = `https://google.com{fileId}/preview`;
+            iframe.src = `https://google.com+fileId+/preview`;
             
             const authorText = bookAuthor ? ` — Oleh: ${bookAuthor}` : '';
             header.innerText = `${bookTitle}${authorText}`;
