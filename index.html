@@ -265,7 +265,7 @@
             
             placeholder.style.display = "none";
             iframe.style.display = "block";
-            iframe.src = "https://drive.google.com" + fileId;
+            iframe.src = "https://drive.google.com/file/d/" + fileId"/preview";
             
             const authorText = bookAuthor ? ` — Oleh: ${bookAuthor}` : '';
             header.innerText = `${bookTitle}${authorText}`;
