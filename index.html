@@ -213,30 +213,33 @@
         }
 
         // 3. Tampilkan list buku ke halaman dalam bentuk Grid Kartu Bergambar
-        function renderBooks(booksToRender) {
-            const listContainer = document.getElementById('book-list');
-            listContainer.innerHTML = ''; 
+function renderBooks(booksToRender) {
+    const listContainer = document.getElementById('book-list');
+    listContainer.innerHTML = ''; 
 
-            if(booksToRender.length === 0) {
-                listContainer.innerHTML = '<div class="loading">Buku tidak ditemukan.</div>';
-                return;
-            }
+    if(booksToRender.length === 0) {
+        listContainer.innerHTML = '<div class="loading">Buku tidak ditemukan.</div>';
+        return;
+    }
 
-            booksToRender.forEach((book, index) => {
-                const item = document.createElement('div');
-                item.className = 'book-item';
-                
-                const thumbnailUrl = "https://drive.google.com" + book.id;
-                
-                item.innerHTML = `
-                    <img class="book-thumbnail" src="${thumbnailUrl}" alt="${book.judul}" onerror="this.src='https://placehold.co'">
-                    <div class="book-title" title="${book.judul}">${book.judul}</div>
-                    <div class="book-author" title="${book.pengarang || 'Anonim'}">${book.pengarang || 'Anonim'}</div>
-                `;
-                
-                item.onclick = () => selectBook(item, book.id, book.judul, book.pengarang);
-                listContainer.appendChild(item);
-            });
+    booksToRender.forEach((book, index) => {
+        const item = document.createElement('div');
+        item.className = 'book-item';
+        
+        // --- PERBAIKAN FORMAT UC EXPORT VIEW AMAN ---
+        const bagianAwal = "https://" + "drive." + "google.com/";
+        const bagianParameter = "uc?export=view&id=";
+        const thumbnailUrl = bagianAwal + bagianParameter + book.id;
+        
+        item.innerHTML = `
+            <img class="book-thumbnail" src="${thumbnailUrl}" alt="${book.judul}onerror="this.src='https://' + 'placehold.co' + '/150x200/34495e/ffffff?text=PDF+Buku'">
+            <div class="book-title" title="${book.judul}">${book.judul}</div>
+            <div class="book-author" title="${book.pengarang || 'Anonim'}">${book.pengarang || 'Anonim'}</div>
+        `;
+        
+        item.onclick = () => selectBook(item, book.id, book.judul, book.pengarang);
+        listContainer.appendChild(item);
+               });
         }
 
         // 4. Logika Pencarian Kata Kunci + Filter Dropdown Kategori
